@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	int	j;
 
 	i = 1;
-	while (argv[i] != '\0')
+	while (argv[i] != NULL)
 	{
 		j = 0;
 		while (argv[i][j])
@@ -30,12 +30,12 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	i = 1;
-	if (argv[i] == '\0')
+	if (argv[i] == NULL)
 	{
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << "\n";
 		return (0);
 	}
-	while (argv[i] != '\0')
+	while (argv[i] != NULL)
 	{
 		std::cout << argv[i] << " ";
 		i++;
