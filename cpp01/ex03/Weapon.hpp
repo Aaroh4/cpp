@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 10:50:54 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/17 09:45:47 by ahamalai         ###   ########.fr       */
+/*   Created: 2024/06/17 11:00:41 by ahamalai          #+#    #+#             */
+/*   Updated: 2024/06/17 14:54:49 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef WEAPON_HPP
+#define WEAPON_HPP
+
+#include <string>
 #include <iostream>
 
-int	main(int argc, char **argv)
+class Weapon
 {
-	int	i;
-	int	j;
+	public:
+		const	std::string& getType();
+		void	setType(std::string _type);
+		Weapon(std::string _type);
+		~Weapon(void);
+	private:
+		std::string type;
+};
 
-	if (argv[1] == NULL)
-	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << "\n";
-		return (0);
-	}
-	for (i = 1; argv[i] != NULL; ++i)
-		for (j = 0; j < argv[i][j] != '\0'; ++j)
-			if (argv[i][j] >= 'a' && argv[i][j] <= 'z')
-				argv[i][j] = argv[i][j] - 32;
-	i = 1;
-	while (argv[i] != NULL)
-	{
-		std::cout << argv[i] << " ";
-		i++;
-	}
-	std::cout << "\n";
-	return (0);
-}
+#endif
