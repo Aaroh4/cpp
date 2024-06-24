@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:41:20 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/24 15:07:59 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:09:47 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class DiamondTrap: public ScavTrap, public FragTrap
 		DiamondTrap();
 		DiamondTrap(std::string nameinput);
 		~DiamondTrap();
-		void	attack(const std::string& target);
 		void 	whoAmI();
 	private:
 		std::string name;

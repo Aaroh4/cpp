@@ -6,20 +6,26 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:23:25 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/20 15:19:40 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:04:33 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(): ClapTrap("", 100, 50, 20)
+ScavTrap::ScavTrap(): ClapTrap("")
 {
+	this->HP = 100;
+	this->EP = 50;
+	this->AD = 20;
 	this->guarding_gate = false;
 	std::cout << "ScavTrap constructed!" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string _name): ClapTrap(_name, 100, 50, 20)
+ScavTrap::ScavTrap(std::string _name): ClapTrap(_name)
 {
+	this->HP = 100;
+	this->EP = 50;
+	this->AD = 20;
 	this->guarding_gate = false;
 	std::cout << "ScavTrap constructed!" << std::endl;
 }

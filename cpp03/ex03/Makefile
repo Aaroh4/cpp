@@ -6,11 +6,11 @@
 #    By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/24 13:50:25 by ahamalai          #+#    #+#              #
-#    Updated: 2024/06/24 14:42:04 by ahamalai         ###   ########.fr        #
+#    Updated: 2024/06/24 15:21:19 by ahamalai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TARGET = fragtrap
+TARGET = diamondtrap
 
 FLAGS = -Wall -Wextra -Werror -std=c++11
 

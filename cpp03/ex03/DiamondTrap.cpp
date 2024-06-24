@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 09:41:18 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/24 15:10:38 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:11:45 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ DiamondTrap::DiamondTrap(): ClapTrap("empty_clap_name")
 DiamondTrap::DiamondTrap(std::string inputname): ClapTrap(inputname + "_clap_name")
 {
 	this->name = inputname;
+	this->HP = FragTrap::HP;
+	this->EP = ScavTrap::EP;
+	this->AD = FragTrap::AD;
 	std::cout << "DiamondTrap constructed!" << std::endl;
 }
 
 DiamondTrap::~DiamondTrap()
 {
-}
-
-void	DiamondTrap::attack(const std::string& target)
-{
-		ScavTrap::attack(target);
+	std::cout << "DiamondTrap destructed!" << std::endl;
 }
 
 void DiamondTrap::whoAmI()
