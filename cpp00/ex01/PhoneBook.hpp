@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 15:40:59 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/03 15:51:17 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/24 13:23:41 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@
 
 class PhoneBook
 {
-
-public:
-	Contact mycontacts[8];
+	public:
+		PhoneBook();
+		~PhoneBook();
+		Contact& getcontact(int num);
+	private:
+		Contact mycontacts[8];
 };
 
 #endif

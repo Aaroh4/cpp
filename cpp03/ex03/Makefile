@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/31 10:51:02 by ahamalai          #+#    #+#              #
-#    Updated: 2024/06/24 13:06:17 by ahamalai         ###   ########.fr        #
+#    Created: 2024/06/24 13:50:25 by ahamalai          #+#    #+#              #
+#    Updated: 2024/06/24 14:42:04 by ahamalai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TARGET = phonebook
+TARGET = fragtrap
 
 FLAGS = -Wall -Wextra -Werror -std=c++11
 
-SRCS = main.cpp searchfunctions.cpp Contact.cpp PhoneBook.cpp \
+SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 

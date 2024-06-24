@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 14:30:31 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/24 14:31:36 by ahamalai         ###   ########.fr       */
+/*   Created: 2024/06/20 12:47:35 by ahamalai          #+#    #+#             */
+/*   Updated: 2024/06/20 15:47:00 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_HPP
-#define FRAGTRAP_HPP
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
-#include "ClapTrap.hpp"
+#include <string>
+#include <iostream>
 
-class FragTrap: public ClapTrap
+class ClapTrap 
 {
 	public:
-		FragTrap();
-		FragTrap(std::string _name);
-		~FragTrap();
-		void highFivesGuys(void);
-	private:
-
+		ClapTrap();
+		ClapTrap(std::string _name);
+		ClapTrap(std::string _name, int _HP, int _EP, int _AD);
+		~ClapTrap();
+		void attack(std::string const& target);
+		void takeDamage(unsigned int amount);
+		void beRepaired(unsigned int amount);
+	protected:
+		std::string name;
+		int	HP;
+		int EP;
+		int AD;
 };
 
 
