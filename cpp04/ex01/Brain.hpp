@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 13:45:30 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/25 14:43:42 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:13:34 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class Brain
 	public:
 		Brain();
 		~Brain();
+	private:
 		std::string ideas[100];	
 };
 

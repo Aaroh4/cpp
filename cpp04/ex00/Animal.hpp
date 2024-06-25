@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:31:18 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/25 13:01:10 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:35:09 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ class Animal
 {
 	public:
 		Animal();
-		~Animal();
-		void	makeSound() const;
+		virtual ~Animal();
+		virtual void	makeSound() const;
 		std::string getType() const;
 	protected:
 		std::string type;		
