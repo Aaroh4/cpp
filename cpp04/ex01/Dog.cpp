@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:41:03 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/25 17:17:30 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:25:35 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ Dog::Dog()
 	this->brain = new Brain();
 	std::cout << "Dog contructed" << std::endl;
 	this->type = "Dog";
+}
+
+Dog::Dog(const Dog& input)
+{
+	this->brain = new Brain(*input.brain);	
 }
 
 Dog::~Dog()

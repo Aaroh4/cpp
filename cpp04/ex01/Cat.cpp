@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:39:37 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/25 17:17:06 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:26:07 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ Cat::Cat()
 	this->brain = new Brain();
 	std::cout << "Cat contructed" << std::endl;
 	this->type = "Cat";
+}
+
+Cat::Cat(const Cat& input)
+{
+	this->brain = new Brain(*input.brain);	
 }
 
 Cat::~Cat()
