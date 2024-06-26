@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:13:37 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/18 13:41:12 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:24:12 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
     	while (std::getline(myfile, line))
      	{
 			lastone = 0;
-			while ((lastone = line.find(argv[2], lastone)) != std::string::npos)
+			while ((lastone = line.find(argv[2], lastone)) != int(std::string::npos))
 			{
 				line = own_replace(lastone, line, argv[2], argv[3]);
 				lastone += std::string(argv[3]).length();

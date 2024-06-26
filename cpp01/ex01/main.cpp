@@ -6,7 +6,7 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 09:44:00 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/06/17 10:40:42 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:13:43 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 {
 	Zombie		*horde;
 	int			nbZombies;
-	std::string	name = "zombie";
+	std::string	name = "zombiee";
 
 	if (argc == 1 || atoi(argv[1]) <= 0)
 		nbZombies = 10;
