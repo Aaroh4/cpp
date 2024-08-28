@@ -15,6 +15,7 @@
 
 #include <string>
 #include <iostream>
+#include "Bureaucrat.hpp"
 
 class Form
 {
@@ -28,6 +29,18 @@ class Form
 			bool		getSigned(void) const;
 			int			getGradeSign(void) const;
 			int			getGradeExecute(void) const;
+			void		beSigned(Bureaucrat *input)
+			class 				GradeTooHighException: public std::exception
+			{
+				public:
+				    	const char *what() const throw();
+
+			};
+			class 				GradeTooLowException: public std::exception
+			{
+				public:
+						const char *what() const throw();
+			};
 	private:
 			const		std::string _name;
 			bool		_signed;

@@ -11,10 +11,10 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-		c++ $(FLAGS) -o $@ $^
+		g++ $(FLAGS) -o $@ $^
 
 %.o: %.cpp
-	c++ $(FLAGS) -c $< -o $@
+	g++ $(FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
