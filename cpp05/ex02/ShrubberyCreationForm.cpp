@@ -6,16 +6,20 @@
 /*   By: ahamalai <ahamalai@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:57:21 by ahamalai          #+#    #+#             */
-/*   Updated: 2024/08/29 15:13:55 by ahamalai         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:16:45 by ahamalai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(): _target("None")
+ShrubberyCreationForm::ShrubberyCreationForm(): _target("None"), AForm("Shrubbery creation", 145, 137)
 {
 }
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &input): _target(input._target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target): _target(target), AForm("Shrubbery creation", 145, 137)
+{
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &input): ShrubberyCreationForm(input._target)
 {
 }
 
@@ -30,4 +34,45 @@ ShrubberyCreationForm & ShrubberyCreationForm::operator=(const ShrubberyCreation
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
+	std::ofstream of(this->_target + "_shrubbery");
+	of << "                     1
+                               111
+                              11111
+                             1111111
+                            111111111
+                           11111111111
+                          1111111111111
+                         111111111111111
+                        11111111111111111
+                       1111111111111111111
+                      111111111111111111111
+                     11111111111111111111111
+                    1111111111111111111111111
+                   111111111111111111111111111
+                  11111111111111111111111111111
+                 1111111111111111111111111111111
+                111111111111111111111111111111111
+               11111111111111111111111111111111111
+              1111111111111111111111111111111111111
+             111111111111111111111111111111111111111
+            11111111111111111111111111111111111111111
+           1111111111111111111111111111111111111111111
+          111111111111111111111111111111111111111111111
+         11111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111
+       111111111111111111111111111111111111111111111111111
+      11111111111111111111111111111111111111111111111111111
+     1111111111111111111111111111111111111111111111111111111
+    111111111111111111111111111111111111111111111111111111111
+   11111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111
+ 111111111111111111111111111111111111111111111111111111111111111
+                            1111111111
+                            1111111111
+                            1111111111
+                            1111111111
+                            1111111111
+                            1111111111
+                            1111111111
+                            1111111111 " << std::endl;
 }
