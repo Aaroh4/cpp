@@ -7,9 +7,9 @@ Bureaucrat::Bureaucrat(): _name("none"), _grade(150)
 Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
 {
 	if (grade < BESTGRADE)
-		throw(Bureaucrat::GradeTooLowException());
-	if (grade > WORSTGRADE)
 		throw(Bureaucrat::GradeTooHighException());
+	if (grade > WORSTGRADE)
+		throw(Bureaucrat::GradeTooLowException());
 	this->_grade = grade;
 }
 
@@ -41,14 +41,14 @@ int	Bureaucrat::getGrade() const
 void Bureaucrat::decrement()
 {
 	if (this->_grade >= WORSTGRADE)
-		throw(Bureaucrat::GradeTooHighException());
+		throw(Bureaucrat::GradeTooLowException());
 	this->_grade++;
 }
 
 void Bureaucrat::increment()
 {
 	if (_grade <= BESTGRADE)
-		throw(Bureaucrat::GradeTooLowException());
+		throw(Bureaucrat::GradeTooHighException());
 	this->_grade--;
 }
 
