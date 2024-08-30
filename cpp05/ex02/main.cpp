@@ -1,17 +1,13 @@
 #include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int main(void)
 {
-	{
-		Bureaucrat	abc("abc", 2);
-		AForm		hello("hello", 3, 50);
+	Bureaucrat	asd("asd", 34);
+	ShrubberyCreationForm abc(asd.getName());
 
-		abc.signForm(hello);
-	}
-	{
-		Bureaucrat	abc("abc", 4);
-		AForm		hello("hello", 3, 50);
-
-		abc.signForm(hello);
-	}
+	abc.executeFormAction();
+	return (1);
 }

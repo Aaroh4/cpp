@@ -25,7 +25,7 @@ class PresidentialPardonForm : public AForm
 			PresidentialPardonForm(const PresidentialPardonForm& input);
 			PresidentialPardonForm& operator=(const PresidentialPardonForm& input);
 
-			void executeFormAction( void ) const;
+			void executeFormAction(void) const;
 	private:
 			std::string	_target;	
 };
