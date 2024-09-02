@@ -48,7 +48,7 @@ int	is_int(std::string input)
 	if (input.empty())
 		return (0);
 	for (int i = 0; input[i] != '\0'; i++)
-		if (!isdigit(input[i]) && (i != 0 && input[i] == '-'))
+		if (!isdigit(input[i]) && (i != 0 && input[i] != '-'))
 			return (0);
 	return (1);
 }
@@ -59,12 +59,14 @@ types get_type(std::string input)
 		return (CHAR);
 	if (is_int(input))
 		return (INT);
-	int	dot_pos = input.find('.');
-	if (is_int(input.substr(0, dot_pos - 1)) && is_int(input.substr(dot_pos + 1, input.length())))
-		return (DOUBLE);
-	if (input[input.length()] == 'f' && is_int(input.substr(0, dot_pos - 1))
-		&& is_int(input.substr(dot_pos + 1, input.length() - 1)))
-		return (FLOAT);
+	size_t	dot_pos = input.find('.');
+	if (is_int(input.substr(0, dot_pos)) && dot_pos != input.length() - 1)
+	{
+		if (is_int(input.substr(dot_pos + 1, input.length() - dot_pos - 1)))
+			return (DOUBLE);
+		if (input[input.length() - 1] == 'f' && is_int(input.substr(dot_pos + 1, input.length() - dot_pos - 2)))
+			return (FLOAT);
+	}
 	if (input == "-inff" || input == "+inff" || input == "nanf")
 		return FLOAT;
 	if (input == "-inf" || input == "+inf" || input == "nan")
@@ -74,8 +76,8 @@ types get_type(std::string input)
 
 void	print_con(int i, char c, float f, double d)
 {
-	std::cout << i << std::endl;
 	std::cout << c << std::endl;
+	std::cout << i << std::endl;
 	std::cout << f << std::endl;
 	std::cout << d << std::endl;
 }
