@@ -1,10 +1,10 @@
 
 
-TARGET = Bureaucrat
+TARGET = convert
 
 FLAGS = -Wall -Wextra -Werror -std=c++11
 
-SRCS = main.cpp Bureaucrat.cpp \
+SRCS = main.cpp ScalarConverter.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
