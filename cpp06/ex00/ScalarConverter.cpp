@@ -2,6 +2,7 @@
 
 int	converter(std::string input, int &i, char &c, float &f, double &d, types type)
 {
+	std::cout << type << std::endl;
 	try
 	{
 		switch (type)
@@ -48,7 +49,7 @@ int	is_int(std::string input)
 	if (input.empty())
 		return (0);
 	for (int i = 0; input[i] != '\0'; i++)
-		if (!isdigit(input[i]) && (i != 0 && input[i] != '-'))
+		if (!std::isdigit(input[i]) && !(i == 0 && input[i] == '-'))
 			return (0);
 	return (1);
 }
@@ -59,14 +60,12 @@ types get_type(std::string input)
 		return (CHAR);
 	if (is_int(input))
 		return (INT);
-	size_t	dot_pos = input.find('.');
-	if (is_int(input.substr(0, dot_pos)) && dot_pos != input.length() - 1)
-	{
-		if (is_int(input.substr(dot_pos + 1, input.length() - dot_pos - 1)))
-			return (DOUBLE);
-		if (input[input.length() - 1] == 'f' && is_int(input.substr(dot_pos + 1, input.length() - dot_pos - 2)))
-			return (FLOAT);
-	}
+	int	dot_pos = input.find('.');
+	if (is_int(input.substr(0, dot_pos)) && is_int(input.substr(dot_pos + 1, std::string::npos)))
+		return (DOUBLE);
+	if (input[input.length() - 1] == 'f' && is_int(input.substr(0, dot_pos)) 
+		&& is_int(input.substr(dot_pos + 1, input.length() - dot_pos - 2)))
+		return (FLOAT);
 	if (input == "-inff" || input == "+inff" || input == "nanf")
 		return FLOAT;
 	if (input == "-inf" || input == "+inf" || input == "nan")
@@ -76,10 +75,13 @@ types get_type(std::string input)
 
 void	print_con(int i, char c, float f, double d)
 {
-	std::cout << c << std::endl;
+	if (c)
+		std::cout << c << std::endl;
+	else
+		std::cout << "Non displayable \n";
 	std::cout << i << std::endl;
-	std::cout << f << std::endl;
-	std::cout << d << std::endl;
+	std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+	std::cout << std::fixed << std::setprecision(1) << d << std::endl;
 }
 
 void ScalarConverter::convert(std::string input)
@@ -93,3 +95,4 @@ void ScalarConverter::convert(std::string input)
 		return;
 	print_con(i, c, f, d);
 }
+
