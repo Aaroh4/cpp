@@ -2,7 +2,7 @@
 
 int	converter(std::string input, int &i, char &c, float &f, double &d, types type)
 {
-	std::cout << type << std::endl;
+	std::cout << "type: " << type << std::endl;
 	try
 	{
 		switch (type)
@@ -75,11 +75,18 @@ types get_type(std::string input)
 
 void	print_con(int i, char c, float f, double d)
 {
-	if (c)
-		std::cout << c << std::endl;
+	if (d >= 0 && d <= 255 && std::isprint(c))
+		std::cout << "char: '" << c << "'\n";
+	else if (d >= 0 && d <= 255)
+		std::cout << "char: " << "Non displayable\n";
 	else
-		std::cout << "Non displayable \n";
-	std::cout << i << std::endl;
+		std::cout << "char: " << "impossible\n";
+
+	if (std::numeric_limits<int>::min() <= d && std::numeric_limits<int>::max() >= d)
+		std::cout << "int: " << i << "\n";
+	else
+		std::cout << "int: impossible \n";
+
 	std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 	std::cout << std::fixed << std::setprecision(1) << d << std::endl;
 }
@@ -96,3 +103,15 @@ void ScalarConverter::convert(std::string input)
 	print_con(i, c, f, d);
 }
 
+ScalarConverter::ScalarConverter(const ScalarConverter &)
+{
+}
+
+ScalarConverter ScalarConverter::operator=(const ScalarConverter &)
+{
+	return (*this);
+}
+
+ScalarConverter::~ScalarConverter()
+{
+}
