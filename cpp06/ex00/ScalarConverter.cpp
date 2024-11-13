@@ -2,7 +2,6 @@
 
 int	converter(std::string input, int &i, char &c, float &f, double &d, types type)
 {
-	std::cout << "type: " << type << std::endl;
 	try
 	{
 		switch (type)
@@ -33,7 +32,7 @@ int	converter(std::string input, int &i, char &c, float &f, double &d, types typ
 				break;
 			default:
 				std::cout << "Could not find type!" << std::endl;
-				break;
+				return (-1);
 		}
 	}
 	catch (std::exception &e)
@@ -87,8 +86,9 @@ void	print_con(int i, char c, float f, double d)
 	else
 		std::cout << "int: impossible \n";
 
-	std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
-	std::cout << std::fixed << std::setprecision(1) << d << std::endl;
+	std::cout << std::fixed << std::setprecision(1);
+	std::cout << "float: " << f << "f\n";
+	std::cout << "double: " << d << "\n";
 }
 
 void ScalarConverter::convert(std::string input)
