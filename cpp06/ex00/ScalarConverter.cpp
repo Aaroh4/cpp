@@ -85,10 +85,28 @@ void	print_con(int i, char c, float f, double d)
 		std::cout << "int: " << i << "\n";
 	else
 		std::cout << "int: impossible \n";
+	
+	std::cout << std::fixed;
+	if (i == d)
+	{
+		std::cout << std::setprecision(1);
+		std::cout << "float: " << f << "f\n";
+		std::cout << "double: " << d << "\n";
+	}
+	else
+	{
+		std::string floatString = std::to_string(d);
 
-	std::cout << std::fixed << std::setprecision(1);
-	std::cout << "float: " << f << "f\n";
-	std::cout << "double: " << d << "\n";
+		floatString = floatString.substr(0, floatString.find_last_not_of('0')+1);
+
+		std::cout << "float: " << floatString << "f\n";
+
+		std::string doubleString = std::to_string(d);
+
+		doubleString = doubleString.substr(0, doubleString.find_last_not_of('0')+1);
+
+		std::cout << "double: " << doubleString << "\n";
+	}
 }
 
 void ScalarConverter::convert(std::string input)
