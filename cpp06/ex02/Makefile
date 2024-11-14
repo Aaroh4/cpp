@@ -1,8 +1,8 @@
-TARGET = convert
+TARGET = identify
 
 FLAGS = -Wall -Wextra -Werror -std=c++11
 
-SRCS = main.cpp ScalarConverter.cpp \
+SRCS = main.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
