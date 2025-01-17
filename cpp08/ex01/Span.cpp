@@ -1,9 +1,9 @@
 #include "Span.hpp"
 #include <numeric>
 
-Span::Span(int n)
+Span::Span(unsigned int N)
 {
-	_max = n;
+	_max = N;
 }
 
 Span::~Span()
