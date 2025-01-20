@@ -27,9 +27,22 @@ void BitcoinExchange::parseLine(std::string line)
 
 	std::string date = line.substr(0, separator);
 
+	if (checkDate(date))
+		std::cout << "\n";
+
 	std::string value = line.substr(separator + 1, line.size() - separator);
 
-	std::cout << value << "\n";
+	// error check
+		m_data[date] = value;
+	//std::cout << value << "\n";
+}
+
+int BitcoinExchange::checkDate(std::string date)
+{
+	// years are 4 long
+	std::cout << date.find("-") << "\n";
+
+	return (0);
 }
 
 //BitcoinExchange::BitcoinExchange(const BitcoinExchange& input)

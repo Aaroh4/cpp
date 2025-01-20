@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <map>
 
 class BitcoinExchange
 {
@@ -10,6 +11,7 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		void parseLine(std::string line);
+		int checkDate(std::string date); // 1 for error and 0 for correct
 
 		class failedOpen: public std::exception
 		{
@@ -20,5 +22,6 @@ class BitcoinExchange
 				std::string m_message;
 		};
 	private:
+		std::map<std::string, std::string> m_data;
 
 };
