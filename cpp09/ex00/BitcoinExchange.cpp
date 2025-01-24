@@ -51,16 +51,26 @@ void BitcoinExchange::parseInput(std::string line)
 		std::cerr << "Error: bad input => " << line << "\n";
 		return ;
 	}
-	float value = std::stof(line.substr(separator + 1, std::string::npos));
+
+	float value;
+	try
+	{
+		value = std::stof(line.substr(separator + 1, std::string::npos));
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Error: " << e.what() << "\n";
+		return ;
+	}
 
 	if (value > 2147483647.0)
 	{
-		std::cerr << "Error: too large a number\n";
+		std::cerr << "Error: too large a number.\n";
 		return ;
 	}
 	else if (value < 0)
 	{
-		std::cerr << "Error: not a positive number\n";
+		std::cerr << "Error: not a positive number.\n";
 		return ;
 	}
 	std::string date = line.substr(0, separator - 1);
