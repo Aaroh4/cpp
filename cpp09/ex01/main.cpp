@@ -1,6 +1,8 @@
 #include "RPN.hpp"
 #include <utility>
 #include <cmath> 
+#include <deque>
+#include <variant>
 
 int main(int argc, char **argv)
 {
@@ -14,100 +16,114 @@ int main(int argc, char **argv)
 
 	std::string arg = argv[1];
 	
-	int offset = 0;
 
-	std::pair<int, int> nums;
-
-		//	if (*(it + 1) != ' ' && *(it + 1) != '\0')
-		//{
-		//	std::cerr << "error wrong argument\n";
-		//	exit (1);
-		//}
-		//else
-		//	it += 2;
+	std::deque<std::variant<int, char>> elements;
 
 	for (auto it = arg.begin(); it <= arg.end();)
 	{
-		if (*it == '+' || *it == '-' || *it == '/' || *it == '*')
-		{	
-			nums.first = std::stoi(arg.substr(it - arg.begin() - 4, 1));
-			std::cout << "asd\n";
-			nums.second = std::stoi(arg.substr(it - arg.begin() - 2, 1));
-			
-			int result;
-			switch (*it)
-			{
-				case '+':
-					result = nums.first + nums.second;
-					break;
-				case '-':
-					result = nums.first - nums.second;
-					break;
-				case '*':
-					result = nums.first * nums.second;
-					break;
-				case '/':
-					result = nums.first / nums.second;
-					break;
-			}
-			nums = {0, 0};
-			offset = std::to_string(result).length();
-			std::cout << "offset: " << offset << "\n";
-			arg.insert(it - arg.begin() - 4, std::to_string(result));
-			std::cout << arg << ":\n";
-			if (offset > 1)
-				arg.erase(it - arg.begin() - 4 + offset, it - arg.begin() - 3 + offset);
-			else
-				arg.erase(it - arg.begin() - 3, it - arg.begin() - 3);
-			std::cout << arg << ":2\n";
-			//exit (0);
-			//if (arg.length() == 1)
-			//{
-			//	arg.erase(0, 1);
-			//	std::cout << result << "\n";
-			//	exit (0);
-			//}
-			//std::cout << arg << ":\n";
-			//std::cout << arg << ":2\n";
-			it = arg.begin();
-			continue;
+		if (*it == '+' || *it == '-' || *it == '/' || *it == '*' )
+			elements.push_back(*it);
+		else if (isdigit(*it))
+			elements.push_back(*it - '0');
+		if (*(it + 1) != ' ' && *(it + 1) != '\0')
+		{
+			std::cerr << "error wrong argument\n";
+			exit (1);
 		}
-		it++;
+		else
+			it += 2;
 	}
 
-	std::cout << arg << "\n";
+	for (size_t i = 0; i < elements.size(); i++)
+	{
+		if (std::holds_alternative<char>(elements[i]))
+		{
+			int result;
+			switch (std::get<char>(elements[i]))
+			{
+				case '+':
+					result = std::get<int>(elements[i - 1]) + std::get<int>(elements[i - 2]);
+					break;
+				case '-':
+					result = std::get<int>(elements[i - 1]) - std::get<int>(elements[i - 2]);
+					break;
+				case '*':
+					result = std::get<int>(elements[i - 1]) * std::get<int>(elements[i - 2]);
+					break;
+				case '/':
+					result = std::get<int>(elements[i - 1]) / std::get<int>(elements[i - 2]);
+					break;
+			}
+			//int result = std::get<int>(elements[i - 1]) + std::get<int>(elements[i - 2]);
+			elements.insert(elements.begin() + i - 2, result);
+			elements.erase(elements.begin() + i - 2, elements.begin() + i + 1);
+			for (size_t j = 0; j < elements.size(); j++)
+				std::cout << std::get<int>(elements[j]) << "\n";
+			i = 0;
+			std::cout << result << "\n";
+		}
+	}
+
+
+
+	//for (size_t i = 0; i < elements.size(); i++)
+	//{
+	//	//std::cout << elements[i] << '\n';
+	//}
 
 	//for (auto it = arg.begin(); it <= arg.end();)
 	//{
-	//	std::cout << "sasd:" << arg << ":\n";
-	//	if (nums.second != 0.0)
-	//	{
-	//		std::cout << nums.first << " " << arg.substr(0, it - arg.begin()) << " " << nums.second << "\n"; 
-	//		nums = {0.0, 0.0}; // first is the sum the second needs to be set again
-	//		it++;
-	//		continue ;
-	//	}
-	//	else if (isdigit(*it)) // needs more checking that the third part isnt num
-	//	{
-	//		it++;
-	//		continue ;
-	//	}
-	//	else if (*it == ' ')
-	//	{
-	//		if (nums.first != 0.0)
+	//	if (*it == '+' || *it == '-' || *it == '/' || *it == '*')
+	//	{	
+	//		//nums.first = std::stoi(arg.substr(it - arg.begin() - 4, 1));
+	//		//std::cout << "asd\n";
+	//		//nums.second = std::stoi(arg.substr(it - arg.begin() - 2, 1));
+	//		nums.first = std::stoi(arg.substr(it - arg.begin() - 4 - offset, 1));
+	//		nums.second = std::stoi(arg.substr(it - arg.begin() - 2 - offset, 1 + offset));
+	//		int result;
+	//		switch (*it)
 	//		{
-	//			std::cout << arg.substr(0, it - arg.begin()) << ":2\n";
-	//			nums.second = stof(arg.substr(0, it - arg.begin())); // stof needs error check
+	//			case '+':
+	//				result = nums.first + nums.second;
+	//				break;
+	//			case '-':
+	//				result = nums.first - nums.second;
+	//				break;
+	//			case '*':
+	//				result = nums.first * nums.second;
+	//				break;
+	//			case '/':
+	//				result = nums.first / nums.second;
+	//				break;
 	//		}
+	//		if (it == arg.end() - 1)
+	//		{
+	//			std::cout << result << '\n';
+	//			exit(0);
+	//		}
+	//		nums = {0, 0};
+	//		offset = std::to_string(result).length() - 1;
+	//		std::cout << "offset: " << offset << "\n";
+	//		arg.insert(it - arg.begin() - 4, std::to_string(result));
+	//		std::cout << arg << ":\n";
+	//		if (offset)
+	//			arg.erase(it - arg.begin() - 3 + offset, it - arg.begin() - 2 + offset);
 	//		else
-	//		{
-	//			nums.first = stof(arg.substr(0, it - arg.begin()) + ".0"); // stof needs error check
-	//			std::cout << nums.first << ":\n";
-	//		}
-	//		arg.erase(0, it - arg.begin() + 1);
-	//		std::cout << "sasd2:" << arg << ":\n";
-	//		continue ;
+	//			arg.erase(it - arg.begin() - 3, it - arg.begin() - 3);
+	//		std::cout << arg << ":2\n";
+	//		//exit (0);
+	//		//if (arg.length() == 1)
+	//		//{
+	//		//	arg.erase(0, 1);
+	//		//	std::cout << result << "\n";
+	//		//	exit (0);
+	//		//}
+	//		//std::cout << arg << ":\n";
+	//		//std::cout << arg << ":2\n";
+	//		it = arg.begin();
+	//		continue;
 	//	}
 	//	it++;
 	//}
+
 }

@@ -1,6 +1,6 @@
 TARGET = RPN
 
-FLAGS = -Wall -Wextra -Werror -std=c++11
+FLAGS = -Wall -Wextra -Werror -std=c++17
 
 SRCS = main.cpp \
 
