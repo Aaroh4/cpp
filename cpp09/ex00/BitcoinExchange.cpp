@@ -1,5 +1,6 @@
 #include "BitcoinExchange.hpp"
 #include <fstream>
+#include <ctime>
 
 BitcoinExchange::BitcoinExchange(std::string filePath)
 {
@@ -75,6 +76,9 @@ void BitcoinExchange::parseInput(std::string line)
 	}
 	std::string date = line.substr(0, separator - 1);
 
+	if (checkDate(date))
+		throw(BitcoinExchange::parsingFail("Input: Format is wrong!"));
+
 	auto it = m_data.lower_bound(date);
 
 	if (it->first != date && it != m_data.begin())
@@ -105,19 +109,24 @@ int BitcoinExchange::checkFloat(std::string value)
 
 int BitcoinExchange::checkDate(std::string date)
 {
-	int i = 0;
+	int day = stoi(date.substr(8, std::string::npos));
+	int month = stoi(date.substr(5, 7));
+	int year = stoi(date.substr(0, 4));
 
-	for (char c : date)
-	{
-		if ((i == 4 || i == 6) && c == '-')
-			continue;
-		if (!isdigit(c))
-			return (1);
-		i++;
-	}
+	// tm_mon is 0-based, tm_year is years since 1900 
+	std::tm tm = {};
+	tm.tm_mday = day;
+	tm.tm_mon = month - 1;
+	tm.tm_year = year - 1900;
 
-	return (0);
+    std::time_t time = std::mktime(&tm);
+
+    if (time == -1 || tm.tm_mday != day || tm.tm_mon != month - 1 || tm.tm_year != year - 1900)
+        return (1);
+
+    return (0);
 }
+
 
 //BitcoinExchange::BitcoinExchange(const BitcoinExchange& input)
 //{
