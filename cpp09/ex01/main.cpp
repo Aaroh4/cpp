@@ -42,25 +42,33 @@ int main(int argc, char **argv)
 			switch (std::get<char>(elements[i]))
 			{
 				case '+':
-					result = std::get<int>(elements[i - 1]) + std::get<int>(elements[i - 2]);
+					result = std::get<int>(elements[i - 2]) + std::get<int>(elements[i - 1]);
 					break;
 				case '-':
-					result = std::get<int>(elements[i - 1]) - std::get<int>(elements[i - 2]);
+					result = std::get<int>(elements[i - 2]) - std::get<int>(elements[i - 1]);
 					break;
 				case '*':
-					result = std::get<int>(elements[i - 1]) * std::get<int>(elements[i - 2]);
+					result = std::get<int>(elements[i - 2]) * std::get<int>(elements[i - 1]);
 					break;
 				case '/':
-					result = std::get<int>(elements[i - 1]) / std::get<int>(elements[i - 2]);
+					result = std::get<int>(elements[i - 2]) / std::get<int>(elements[i - 1]);
 					break;
 			}
 			//int result = std::get<int>(elements[i - 1]) + std::get<int>(elements[i - 2]);
 			elements.insert(elements.begin() + i - 2, result);
-			elements.erase(elements.begin() + i - 2, elements.begin() + i + 1);
-			for (size_t j = 0; j < elements.size(); j++)
-				std::cout << std::get<int>(elements[j]) << "\n";
-			i = 0;
+			elements.erase(elements.begin() + i + 1);
+			elements.erase(elements.begin() + i);
+			elements.erase(elements.begin() + i - 1);
+			//for (size_t j = 0; j < elements.size(); j++)
+			//{
+			//	if (std::holds_alternative<char>(elements[j]))
+			//		std::cout << std::get<char>(elements[j]) << "\n";
+			//	else
+			//		std::cout << std::get<int>(elements[j]) << "\n";
+			//}
 			std::cout << result << "\n";
+			//exit (0);
+			i = 0;
 		}
 	}
 
