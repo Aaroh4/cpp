@@ -2,7 +2,7 @@ TARGET = RPN
 
 FLAGS = -Wall -Wextra -Werror -std=c++17
 
-SRCS = main.cpp \
+SRCS = main.cpp RPN.cpp\
 
 OBJS = $(SRCS:.cpp=.o)
 
