@@ -7,9 +7,13 @@ void PmergeMe::sortVec()
 	if (m_vector.size() == 1)
 		return ;
 	std::vector<std::pair<int, int>> pairs;
+	int odd = -1;
 
 	for (size_t i = 0; i + 1 < m_vector.size(); i+= 2)
 		pairs.push_back({m_vector[i], m_vector[i + 1]});
+	if (m_vector.size() % 2 == 1)
+		odd = m_vector.back();
+	
 	m_vector.clear();
 	for (size_t i = 0; i < pairs.size(); i++)
 	{
@@ -17,7 +21,8 @@ void PmergeMe::sortVec()
 			std::swap(pairs[i].first, pairs[i].second);
 		m_vector.push_back(pairs[i].second);
 	}
-
+	if (odd != -1)
+		m_vector.push_back(odd);
 	sortVec();
 
 	for (size_t i = 0; i < pairs.size(); i++)
