@@ -34,6 +34,7 @@ class BitcoinExchange
 		};
 
 	private:
+		BitcoinExchange() = delete;
 		std::map<std::string, std::string> m_data;
 
 };
