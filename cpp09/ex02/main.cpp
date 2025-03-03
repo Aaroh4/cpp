@@ -10,6 +10,9 @@ int main(int argc, char **argv)
 	}
 	try
 	{
+		std::cout << "Before: ";
+		for (int i = 1; i < argc; i++)
+			std::cout << argv[i] << " ";
 		PmergeMe a(argv);
 	}
 	catch(const std::exception& e)

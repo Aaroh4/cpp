@@ -5,6 +5,7 @@ class PmergeMe
 {
 	public:
 		void	sortVec();
+		void	sortList();
 
 		PmergeMe(char **argv);
 		~PmergeMe();
