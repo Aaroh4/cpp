@@ -77,12 +77,7 @@ PmergeMe::PmergeMe(char **argv)
 	auto start = std::chrono::high_resolution_clock::now();
 	for (size_t i = 1; argv[i]; i++)
 	{
-		int num;
-		if (0 > (num = std::stoi(argv[i])))
-		{
-			std::cout << "Error: Negative number\n";
-			exit (1);
-		}
+		int num = std::stoi(argv[i]);
 		m_vector.push_back(num);
 	}
 
@@ -98,12 +93,7 @@ PmergeMe::PmergeMe(char **argv)
 
 	for (size_t i = 1; argv[i]; i++)
 	{
-		int num;
-		if (0 > (num = std::stoi(argv[i])))
-		{
-			std::cout << "Error\n";
-			exit (1);
-		}
+		int num = std::stoi(argv[i]);
 		m_list.push_back(num);
 	}
 	start = std::chrono::high_resolution_clock::now();
