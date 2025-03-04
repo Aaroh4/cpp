@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 {
 	if (argc < 2)
 	{
-		std::cout << "Error\n";
+		std::cout << "Error: Wrong arguments\n";
 		exit (1);
 	}
 	try
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	}
 	catch(const std::exception& e)
 	{
-		std::cout << "Error\n";
+		std::cout << "Error: " << e.what() << "\n";
 		exit (1);
 	}
 

@@ -25,6 +25,7 @@ void PmergeMe::sortVec()
 		m_vector.push_back(odd);
 	sortVec();
 
+
 	for (size_t i = 0; i < pairs.size(); i++)
 	{
 		std::vector<int>::iterator it = m_vector.begin();
@@ -79,7 +80,7 @@ PmergeMe::PmergeMe(char **argv)
 		int num;
 		if (0 > (num = std::stoi(argv[i])))
 		{
-			std::cout << "Error\n";
+			std::cout << "Error: Negative number\n";
 			exit (1);
 		}
 		m_vector.push_back(num);

@@ -60,11 +60,11 @@ void BitcoinExchange::parseInput(std::string line)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "Error: " << e.what() << "\n";
+		std::cerr << "Error: " << e.what() << "\n";
 		return ;
 	}
 
-	if (value > 2147483647.0)
+	if (value > 1000.0f)
 	{
 		std::cerr << "Error: too large a number.\n";
 		return ;
@@ -77,10 +77,18 @@ void BitcoinExchange::parseInput(std::string line)
 	std::string date = line.substr(0, separator - 1);
 
 	if (checkDate(date))
-		throw(BitcoinExchange::parsingFail("Input: Format is wrong!"));
+	{
+		std::cerr << "Format is wrong!\n";
+		return ;
+	}
 
 	auto it = m_data.lower_bound(date);
 
+	if (it == m_data.begin())
+	{
+		std::cerr << "Error: No lower data!\n";
+		return ;
+	}
 	if (it->first != date && it != m_data.begin())
 		it--;
 	float dataValue = std::stof(it->second);
@@ -126,17 +134,6 @@ int BitcoinExchange::checkDate(std::string date)
 
     return (0);
 }
-
-
-//BitcoinExchange::BitcoinExchange(const BitcoinExchange& input)
-//{
-//}
-
-//BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& input)
-//{
-
-//	return (*this);
-//}
 
 BitcoinExchange::~BitcoinExchange()
 {

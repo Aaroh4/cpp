@@ -6,8 +6,6 @@ class BitcoinExchange
 {
 	public:
 		BitcoinExchange(std::string filePath);
-		BitcoinExchange(const BitcoinExchange&);
-		BitcoinExchange& operator=(const BitcoinExchange&);
 		~BitcoinExchange();
 
 		void parseDatabase(std::string line);
@@ -34,6 +32,8 @@ class BitcoinExchange
 		};
 
 	private:
+		BitcoinExchange(const BitcoinExchange&) = delete;
+		BitcoinExchange& operator=(const BitcoinExchange&) = delete;
 		BitcoinExchange() = delete;
 		std::map<std::string, std::string> m_data;
 
