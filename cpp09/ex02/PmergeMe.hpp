@@ -7,7 +7,8 @@
 class PmergeMe
 {
 	public:
-		std::vector<size_t> generateJacobsthalIndices(size_t n);
+		std::vector<size_t> generateJacobsthalIndicesV(size_t n);
+		std::list<size_t> generateJacobsthalIndicesL(size_t n);
 		size_t binarySearchInsertion(const std::vector<int>& sorted, int target);
 		size_t binarySearchInsertion(const std::list<int>& sorted, int target);
 		void	sortVec();

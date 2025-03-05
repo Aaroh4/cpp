@@ -3,7 +3,7 @@
 #include <chrono>
 
 
-std::vector<size_t> PmergeMe::generateJacobsthalIndices(size_t n) 
+std::vector<size_t> PmergeMe::generateJacobsthalIndicesV(size_t n) 
 {
 	std::vector<size_t> indices;
 	indices.push_back(0);
@@ -21,6 +21,23 @@ std::vector<size_t> PmergeMe::generateJacobsthalIndices(size_t n)
 	return (indices);
 }
 
+std::list<size_t> PmergeMe::generateJacobsthalIndicesL(size_t n) 
+{
+	std::list<size_t> indices;
+	indices.push_back(0);
+	
+	size_t j = 1;
+	while (j < n) 
+	{
+		indices.push_back(j);
+		j = (j == 1) ? 3 : j * 2 + 1;
+	}
+			
+	while (indices.back() < n - 1)
+		indices.push_back(indices.back() + 2);
+	
+	return (indices);
+}
 
 size_t PmergeMe::binarySearchInsertion(const std::vector<int>& sorted, int target) 
 {
@@ -42,21 +59,23 @@ size_t PmergeMe::binarySearchInsertion(const std::vector<int>& sorted, int targe
 
 size_t PmergeMe::binarySearchInsertion(const std::list<int>& sorted, int target) 
 {
-	size_t left = 0;
-	size_t right = sorted.size();
-	
-	while (left < right) 
-	{
-		std::list<int>::const_iterator it = sorted.begin();
-		std::advance(it, left + (right - left) / 2);
+    size_t left = 0;
+    size_t right = sorted.size();
 
-		if (*it < target)
-			left = *it + 1;
-		else
-			right = *it;
-	}
-	
-	return (left);
+    while (left < right) 
+    {
+        size_t mid = left + (right - left) / 2;
+        std::list<int>::const_iterator it = sorted.begin();
+        
+        std::advance(it, mid);
+
+        if (*it < target)
+            left = mid + 1;
+        else
+            right = mid;
+    }
+
+    return (left);
 }
 
 void PmergeMe::sortVec()
@@ -87,9 +106,10 @@ void PmergeMe::sortVec()
 	
 	sortVec();
 	
-	std::vector<size_t> jacobsthalIndices = generateJacobsthalIndices(pairs.size());
+	std::vector<size_t> jacobsthalIndices = generateJacobsthalIndicesV(pairs.size());
 	
-	for (size_t index : jacobsthalIndices) {
+	for (size_t index : jacobsthalIndices) 
+	{
 		if (index >= pairs.size())
 			break;
 		
@@ -125,12 +145,20 @@ void PmergeMe::sortList()
 		m_list.push_back(odd);
 	sortList();
 
-	for (std::pair<int, int>& pair : pairs)
+	std::list<size_t> jacobsthalIndices = generateJacobsthalIndicesL(pairs.size());
+	
+	for (size_t index : jacobsthalIndices) 
 	{
-		it = m_list.begin();
-		while (*it < pair.first)
-			it++;
-		m_list.insert(it, pair.first);
+		if (index >= pairs.size())
+			break;
+		
+		std::list<std::pair<int, int>>::const_iterator pairIt = pairs.begin();
+		std::advance(pairIt, index);
+
+		size_t insertPos = binarySearchInsertion(m_list, pairIt->first);
+		std::list<int>::const_iterator listIt = m_list.begin();
+		std::advance(listIt, insertPos);
+		m_list.insert(listIt, pairIt->first);
 	}
 }
 
