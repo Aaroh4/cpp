@@ -2,36 +2,99 @@
 #include <iostream>
 #include <chrono>
 
+
+std::vector<size_t> PmergeMe::generateJacobsthalIndices(size_t n) 
+{
+	std::vector<size_t> indices;
+	indices.push_back(0);
+	
+	size_t j = 1;
+	while (j < n) 
+	{
+		indices.push_back(j);
+		j = (j == 1) ? 3 : j * 2 + 1;
+	}
+			
+	while (indices.back() < n - 1)
+		indices.push_back(indices.back() + 2);
+	
+	return (indices);
+}
+
+
+size_t PmergeMe::binarySearchInsertion(const std::vector<int>& sorted, int target) 
+{
+	size_t left = 0;
+	size_t right = sorted.size();
+	
+	while (left < right) 
+	{
+		size_t mid = left + (right - left) / 2;
+		
+		if (sorted[mid] < target)
+			left = mid + 1;
+		else
+			right = mid;
+	}
+	
+	return (left);
+}
+
+size_t PmergeMe::binarySearchInsertion(const std::list<int>& sorted, int target) 
+{
+	size_t left = 0;
+	size_t right = sorted.size();
+	
+	while (left < right) 
+	{
+		std::list<int>::const_iterator it = sorted.begin();
+		std::advance(it, left + (right - left) / 2);
+
+		if (*it < target)
+			left = *it + 1;
+		else
+			right = *it;
+	}
+	
+	return (left);
+}
+
 void PmergeMe::sortVec()
 {
-	if (m_vector.size() == 1)
-		return ;
+	if (m_vector.size() <= 1)
+		return;
+	
 	std::vector<std::pair<int, int>> pairs;
 	int odd = -1;
 
-	for (size_t i = 0; i + 1 < m_vector.size(); i+= 2)
+	for (size_t i = 0; i + 1 < m_vector.size(); i += 2)
 		pairs.push_back({m_vector[i], m_vector[i + 1]});
+	
 	if (m_vector.size() % 2 == 1)
 		odd = m_vector.back();
 	
-	m_vector.clear();
-	for (size_t i = 0; i < pairs.size(); i++)
-	{
-		if (pairs[i].first > pairs[i].second)
-			std::swap(pairs[i].first, pairs[i].second);
-		m_vector.push_back(pairs[i].second);
+	for (std::pair<int, int>& p : pairs) {
+		if (p.first > p.second)
+			std::swap(p.first, p.second);
 	}
+	
+	m_vector.clear();
+	for (const std::pair<int, int>& p : pairs)
+		m_vector.push_back(p.second);
+	
 	if (odd != -1)
 		m_vector.push_back(odd);
+	
 	sortVec();
-
-
-	for (size_t i = 0; i < pairs.size(); i++)
-	{
-		std::vector<int>::iterator it = m_vector.begin();
-		while (*it < pairs[i].first)
-			it++;
-		m_vector.insert(it, pairs[i].first);
+	
+	std::vector<size_t> jacobsthalIndices = generateJacobsthalIndices(pairs.size());
+	
+	for (size_t index : jacobsthalIndices) {
+		if (index >= pairs.size())
+			break;
+		
+		size_t insertPos = binarySearchInsertion(m_vector, pairs[index].first);
+		m_vector.insert(m_vector.begin() + insertPos, pairs[index].first);
 	}
 }
 
@@ -91,12 +154,12 @@ PmergeMe::PmergeMe(char **argv)
 	std::cout << "\nTime to process a range of " << m_vector.size() <<
 		" elements with std::vector : " << elapsed.count() << " µs\n";
 
+	start = std::chrono::high_resolution_clock::now();
 	for (size_t i = 1; argv[i]; i++)
 	{
 		int num = std::stoi(argv[i]);
 		m_list.push_back(num);
 	}
-	start = std::chrono::high_resolution_clock::now();
 	sortList();
 	end = std::chrono::high_resolution_clock::now();
     elapsed = end - start;
