@@ -107,14 +107,25 @@ void PmergeMe::sortVec()
 	sortVec();
 	
 	std::vector<size_t> jacobsthalIndices = generateJacobsthalIndicesV(pairs.size());
+	std::vector<bool> processed(pairs.size(), false);
 	
 	for (size_t index : jacobsthalIndices) 
 	{
 		if (index >= pairs.size())
-			break;
+			continue;
 		
 		size_t insertPos = binarySearchInsertion(m_vector, pairs[index].first);
 		m_vector.insert(m_vector.begin() + insertPos, pairs[index].first);
+		processed[index] = true;
+	}
+	
+	for (size_t i = 0; i < pairs.size(); i++) 
+	{
+		if (!processed[i]) 
+		{
+			size_t insertPos = binarySearchInsertion(m_vector, pairs[i].first);
+			m_vector.insert(m_vector.begin() + insertPos, pairs[i].first);
+		}
 	}
 }
 
@@ -146,19 +157,34 @@ void PmergeMe::sortList()
 	sortList();
 
 	std::list<size_t> jacobsthalIndices = generateJacobsthalIndicesL(pairs.size());
+	std::vector<bool> processed(pairs.size(), false);
 	
 	for (size_t index : jacobsthalIndices) 
 	{
 		if (index >= pairs.size())
-			break;
+			continue;
 		
 		std::list<std::pair<int, int>>::const_iterator pairIt = pairs.begin();
 		std::advance(pairIt, index);
 
 		size_t insertPos = binarySearchInsertion(m_list, pairIt->first);
-		std::list<int>::const_iterator listIt = m_list.begin();
+		std::list<int>::iterator listIt = m_list.begin();
 		std::advance(listIt, insertPos);
 		m_list.insert(listIt, pairIt->first);
+		processed[index] = true;
+	}
+	
+	size_t i = 0;
+	for (std::list<std::pair<int, int>>::const_iterator pairIt = pairs.begin(); 
+		 pairIt != pairs.end(); ++pairIt, ++i) 
+	{
+		if (!processed[i]) 
+		{
+			size_t insertPos = binarySearchInsertion(m_list, pairIt->first);
+			std::list<int>::iterator listIt = m_list.begin();
+			std::advance(listIt, insertPos);
+			m_list.insert(listIt, pairIt->first);
+		}
 	}
 }
 

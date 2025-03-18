@@ -12,13 +12,14 @@ int main(int argc, char **argv)
 	{
 		for (int i = 1; i < argc; i++)
 		{
-			int num = std::stoi(argv[1]);
+			int num = std::stoi(argv[i]);
 			if (num < 0)
 				throw std::invalid_argument("Non positive numbers");
-			std::string remaining = argv[1];
+			std::string remaining = argv[i];
 			if (remaining != std::to_string(num))
-				throw std::invalid_argument("invalid characters");
+				throw std::invalid_argument("invalid input");
 		}
+		std::cout << "Before: ";
 		for (int i = 1; i < argc; i++)
 			std::cout << argv[i] << " ";
 		PmergeMe a(argv);
